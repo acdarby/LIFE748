@@ -1,11 +1,157 @@
-# Assembly workshop
+# Assembly workshops
 
 NOTE
 >This document make the assumption:
 >- That you are working in a WSL terminal [installing WSL](WSL.md)
 >- That you have installed conda and the required software [install conda](conda_install.md)
 >- That you have run the command `conda activate genomics_env`
-   
+
+### We can use `fastqc` to check the error profiles of the reads
+```
+fastqc --help
+```
+Can be used to remind you on the parameters we can provide/change:
+```
+
+            FastQC - A high throughput sequence QC analysis tool
+
+SYNOPSIS
+
+	fastqc seqfile1 seqfile2 .. seqfileN
+
+    fastqc [-o output dir] [--(no)extract] [-f fastq|bam|sam]
+           [-c contaminant file] seqfile1 .. seqfileN
+
+DESCRIPTION
+
+    FastQC reads a set of sequence files and produces from each one a quality
+    control report consisting of a number of different modules, each one of
+    which will help to identify a different potential type of problem in your
+    data.
+
+    If no files to process are specified on the command line then the program
+    will start as an interactive graphical application.  If files are provided
+    on the command line then the program will run with no user interaction
+    required.  In this mode it is suitable for inclusion into a standardised
+    analysis pipeline.
+
+    The options for the program as as follows:
+
+    -h --help       Print this help file and exit
+
+    -v --version    Print the version of the program and exit
+
+    -o --outdir     Create all output files in the specified output directory.
+                    Please note that this directory must exist as the program
+                    will not create it.  If this option is not set then the
+                    output file for each sequence file is created in the same
+                    directory as the sequence file which was processed.
+
+    --casava        Files come from raw casava output. Files in the same sample
+                    group (differing only by the group number) will be analysed
+                    as a set rather than individually. Sequences with the filter
+                    flag set in the header will be excluded from the analysis.
+                    Files must have the same names given to them by casava
+                    (including being gzipped and ending with .gz) otherwise they
+                    won't be grouped together correctly.
+
+    --nano          Files come from nanopore sequences and are in fast5 format. In
+                    this mode you can pass in directories to process and the program
+                    will take in all fast5 files within those directories and produce
+                    a single output file from the sequences found in all files.
+
+    --nofilter      If running with --casava then don't remove read flagged by
+                    casava as poor quality when performing the QC analysis.
+
+    --extract       If set then the zipped output file will be uncompressed in
+                    the same directory after it has been created. If --delete is
+                    also specified then the zip file will be removed after the
+                    contents are unzipped.
+
+    -j --java       Provides the full path to the java binary you want to use to
+                    launch fastqc. If not supplied then java is assumed to be in
+                    your path.
+
+    --noextract     Do not uncompress the output file after creating it.  You
+                    should set this option if you do not wish to uncompress
+                    the output when running in non-interactive mode.
+
+    --nogroup       Disable grouping of bases for reads >50bp. All reports will
+                    show data for every base in the read.  WARNING: Using this
+                    option will cause fastqc to crash and burn if you use it on
+                    really long reads, and your plots may end up a ridiculous size.
+                    You have been warned!
+
+    --min_length    Sets an artificial lower limit on the length of the sequence
+                    to be shown in the report.  As long as you set this to a value
+                    greater or equal to your longest read length then this will be
+                    the sequence length used to create your read groups.  This can
+                    be useful for making directly comaparable statistics from
+                    datasets with somewhat variable read lengths.
+
+    --dup_length    Sets a length to which the sequences will be truncated when
+                    defining them to be duplicates, affecting the duplication and
+                    overrepresented sequences plot.  This can be useful if you have
+                    long reads with higher levels of miscalls, or contamination with
+                    adapter dimers containing UMI sequences.
+
+
+    -f --format     Bypasses the normal sequence file format detection and
+                    forces the program to use the specified format.  Valid
+                    formats are bam,sam,bam_mapped,sam_mapped and fastq
+
+
+    --memory        Sets the base amount of memory, in Megabytes, used to process
+                    each file.  Defaults to 512MB.  You may need to increase this if
+                    you have a file with very long sequences in it.
+
+    --svg           Save the graphs in the report in SVG format.
+
+    -t --threads    Specifies the number of files which can be processed
+                    simultaneously.  Each thread will be allocated 250MB of
+                    memory so you shouldn't run more threads than your
+                    available memory will cope with, and not more than
+                    6 threads on a 32 bit machine
+
+    -c              Specifies a non-default file which contains the list of
+    --contaminants  contaminants to screen overrepresented sequences against.
+                    The file must contain sets of named contaminants in the
+                    form name[tab]sequence.  Lines prefixed with a hash will
+                    be ignored.
+
+    -a              Specifies a non-default file which contains the list of
+    --adapters      adapter sequences which will be explicity searched against
+                    the library. The file must contain sets of named adapters
+                    in the form name[tab]sequence.  Lines prefixed with a hash
+                    will be ignored.
+
+    -l              Specifies a non-default file which contains a set of criteria
+    --limits        which will be used to determine the warn/error limits for the
+                    various modules.  This file can also be used to selectively
+                    remove some modules from the output all together.  The format
+                    needs to mirror the default limits.txt file found in the
+                    Configuration folder.
+
+   -k --kmers       Specifies the length of Kmer to look for in the Kmer content
+                    module. Specified Kmer length must be between 2 and 10. Default
+                    length is 7 if not specified.
+
+   -q --quiet       Suppress all progress messages on stdout and only report errors.
+
+   -d --dir         Selects a directory to be used for temporary files written when
+                    generating report images. Defaults to system temp directory if
+                    not specified.
+
+BUGS
+
+    Any bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk
+    or in www.bioinformatics.babraham.ac.uk/bugzilla/
+```
+
+We can view the report by navigating to the unix home using filemanager "clinking on the pengiun"
+
+!![Model]()
+ 
 ### We are using the assemblier called `flye` [Flye github](https://github.com/fenderglass/Flye)
 ```
 flye --help
@@ -107,9 +253,99 @@ You can run Flye polisher as a standalone tool using
 flye --nano-raw S_ONT_raw_short.fastq --out-dir S_ONT_raw_short
 ```
 ### Assembly datasets and anaylsis provided:
-Pacbio E. coli three genomes:
+Pacbio E. coli three genomes at 30x coverage:
 
 | raw reads      | fastqc | flye | quast |
-| ----------- | ----------- |-----------|-----------|
-| Header      | Title       |
-| Paragraph   | Text        |
+| ---------------| ------ |------|-------|
+| GN3_long.fastq |        |      |        |
+| GN6_long.fastq |        |      |        |
+| GN9_long.fastq |        |      |        |
+
+ONT Salonella genome at 30X coverage:
+
+| raw reads      | fastqc | flye | quast |
+| ---------------| ------ |------|-------|
+| S_long.fastq |        |      |        |
+| S_short.fastq |        |      |        |
+| S_quailty.fastq |        |      |        |
+| S_x10.fastq |        |      |        |
+| S_x100.fastq |        |      |        |
+
+Pacbio Salonella genome at 30X coverage:
+| raw reads      | fastqc | flye | quast |
+| ---------------| ------ |------|-------|
+| S_hifi.fastq |        |      |        |
+| S_hifi_x10.fastq |        |      |        |
+
+
+This command:
+```
+flye --pacbio-hifi GN3_long.fastq --out-dir GN3_long
+```
+provide this output to stdout:
+```
+[2023-11-22 23:19:40] INFO: Starting Flye 2.9.2-b1786
+[2023-11-22 23:19:40] INFO: >>>STAGE: configure
+[2023-11-22 23:19:40] INFO: Configuring run
+[2023-11-22 23:19:42] INFO: Total read length: 250003313
+[2023-11-22 23:19:42] INFO: Reads N50/N90: 16096 / 14580
+[2023-11-22 23:19:42] INFO: Minimum overlap set to 10000
+[2023-11-22 23:19:42] INFO: >>>STAGE: assembly
+[2023-11-22 23:19:42] INFO: Assembling disjointigs
+[2023-11-22 23:19:42] INFO: Reading sequences
+[2023-11-22 23:19:43] INFO: Building minimizer index
+[2023-11-22 23:19:43] INFO: Pre-calculating index storage
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+[2023-11-22 23:20:00] INFO: Filling index
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+[2023-11-22 23:21:12] INFO: Extending reads
+[2023-11-22 23:22:07] INFO: Overlap-based coverage: 32
+[2023-11-22 23:22:07] INFO: Median overlap divergence: 0.00101259
+0% 70% 100%
+[2023-11-22 23:27:23] INFO: Assembled 4 disjointigs
+[2023-11-22 23:27:23] INFO: Generating sequence
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+[2023-11-22 23:27:26] INFO: Filtering contained disjointigs
+0% 20% 50% 70% 100%
+[2023-11-22 23:27:28] INFO: Contained seqs: 0
+[2023-11-22 23:27:28] INFO: >>>STAGE: consensus
+[2023-11-22 23:27:28] INFO: Running Minimap2
+[2023-11-22 23:28:34] INFO: Computing consensus
+[2023-11-22 23:30:47] INFO: Alignment error rate: 0.005580
+[2023-11-22 23:30:47] INFO: >>>STAGE: repeat
+[2023-11-22 23:30:47] INFO: Building and resolving repeat graph
+[2023-11-22 23:30:47] INFO: Parsing disjointigs
+[2023-11-22 23:30:47] INFO: Building repeat graph
+0% 20% 50% 70% 100%
+[2023-11-22 23:30:49] INFO: Median overlap divergence: 0.00633243
+[2023-11-22 23:30:49] INFO: Parsing reads
+[2023-11-22 23:30:50] INFO: Aligning reads to the graph
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+[2023-11-22 23:32:24] INFO: Aligned read sequence: 248393755 / 250003313 (0.993562)
+[2023-11-22 23:32:24] INFO: Median overlap divergence: 0.000222385
+[2023-11-22 23:32:24] INFO: Mean edge coverage: 47
+[2023-11-22 23:32:24] INFO: Simplifying the graph
+[2023-11-22 23:32:24] INFO: >>>STAGE: contigger
+[2023-11-22 23:32:24] INFO: Generating contigs
+[2023-11-22 23:32:24] INFO: Reading sequences
+[2023-11-22 23:32:25] INFO: Generated 6 contigs
+[2023-11-22 23:32:25] INFO: Added 0 scaffold connections
+[2023-11-22 23:32:25] INFO: >>>STAGE: polishing
+[2023-11-22 23:32:25] INFO: Polishing genome (1/1)
+[2023-11-22 23:32:25] INFO: Running minimap2
+[2023-11-22 23:33:28] INFO: Separating alignment into bubbles
+[2023-11-22 23:36:27] INFO: Alignment error rate: 0.003609
+[2023-11-22 23:36:27] INFO: Correcting bubbles
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+[2023-11-22 23:39:29] INFO: >>>STAGE: finalize
+[2023-11-22 23:39:29] INFO: Assembly statistics:
+
+	Total length:	5243798
+	Fragments:	5
+	Fragments N50:	4947119
+	Largest frg:	4947119
+	Scaffolds:	0
+	Mean coverage:	46
+
+[2023-11-22 23:39:29] INFO: Final assembly: /pub59/acdarby/tmp_data/GN3_long/assembly.fasta
+```
