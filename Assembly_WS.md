@@ -150,7 +150,7 @@ BUGS
 
 We can view the report by navigating to the unix home using filemanager "clinking on the pengiun"
 
-![Model](https://github.com/acdarby/LIFE748/blob/main/Tux_Classic_flat_look_v1.1.svg)
+![Model](https://github.com/acdarby/LIFE748/blob/main/Artboard1.png)
  
 ### We are using the assemblier called `flye` [Flye github](https://github.com/fenderglass/Flye)
 ```
