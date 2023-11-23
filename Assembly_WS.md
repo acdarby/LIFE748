@@ -13,25 +13,25 @@ Pacbio E. coli three genomes at 30x coverage:
 
 | raw reads      | fastqc | flye | quast |
 | ---------------| ------ |------|-------|
-| GN3_long.fastq |        |      |        |
-| GN6_long.fastq |        |      |        |
-| GN9_long.fastq |        |      |        |
+| GN3_hifix30.fastq |        |      |        |
+| GN6_hifix30.fastq |        |      |        |
+| GN9_hifix30.fastq |        |      |        |
 
 ONT Salonella genome at 30X coverage:
 
 | raw reads      | fastqc | flye | quast |
 | ---------------| ------ |------|-------|
-| S_long.fastq |        |      |        |
-| S_short.fastq |        |      |        |
-| S_quailty.fastq |        |      |        |
-| S_x10.fastq |        |      |        |
-| S_x100.fastq |        |      |        |
+| S_longx30.fastq |        |      |        |
+| S_shortx30.fastq |        |      |        |
+| S_raw_longx30.fastq |        |      |        |
+| S_longx10.fastq |        |      |        |
+| S_longx100.fastq |        |      |        |
 
 Pacbio Salonella genome at 30X coverage:
 | raw reads      | fastqc | flye | quast |
 | ---------------| ------ |------|-------|
-| S_hifi.fastq |        |      |        |
-| S_hifi_x10.fastq |        |      |        |
+| S_hifi_longx30.fastq |        |      |        |
+
 
 
 
