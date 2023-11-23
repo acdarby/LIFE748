@@ -6,6 +6,36 @@ NOTE
 >- That you have installed conda and the required software [install conda](conda_install.md)
 >- That you have run the command `conda activate genomics_env`
 
+### Assembly datasets and anaylsis provided:
+[DATA](https://github.com/acdarby/LIFE748/blob/main/data_downloads.md)
+
+Pacbio E. coli three genomes at 30x coverage:
+
+| raw reads      | fastqc | flye | quast |
+| ---------------| ------ |------|-------|
+| GN3_long.fastq |        |      |        |
+| GN6_long.fastq |        |      |        |
+| GN9_long.fastq |        |      |        |
+
+ONT Salonella genome at 30X coverage:
+
+| raw reads      | fastqc | flye | quast |
+| ---------------| ------ |------|-------|
+| S_long.fastq |        |      |        |
+| S_short.fastq |        |      |        |
+| S_quailty.fastq |        |      |        |
+| S_x10.fastq |        |      |        |
+| S_x100.fastq |        |      |        |
+
+Pacbio Salonella genome at 30X coverage:
+| raw reads      | fastqc | flye | quast |
+| ---------------| ------ |------|-------|
+| S_hifi.fastq |        |      |        |
+| S_hifi_x10.fastq |        |      |        |
+
+
+
+
 ### We can use `fastqc` to check the error profiles of the reads
 ```
 fastqc --help
@@ -151,7 +181,12 @@ BUGS
 We can view the report by navigating to the unix home using filemanager "clinking on the pengiun"
 
 ![Model](https://github.com/acdarby/LIFE748/blob/main/Artboard1.png)
- 
+
+And find the `*.html` file click on this to open the file in a browser.
+
+note 
+>Refer to the lecture notes make some observations about the quanity, quality and length of the reads in the different files.
+
 ### We are using the assemblier called `flye` [Flye github](https://github.com/fenderglass/Flye)
 ```
 flye --help
@@ -252,30 +287,6 @@ You can run Flye polisher as a standalone tool using
 ```
 flye --nano-raw S_ONT_raw_short.fastq --out-dir S_ONT_raw_short
 ```
-### Assembly datasets and anaylsis provided:
-Pacbio E. coli three genomes at 30x coverage:
-
-| raw reads      | fastqc | flye | quast |
-| ---------------| ------ |------|-------|
-| GN3_long.fastq |        |      |        |
-| GN6_long.fastq |        |      |        |
-| GN9_long.fastq |        |      |        |
-
-ONT Salonella genome at 30X coverage:
-
-| raw reads      | fastqc | flye | quast |
-| ---------------| ------ |------|-------|
-| S_long.fastq |        |      |        |
-| S_short.fastq |        |      |        |
-| S_quailty.fastq |        |      |        |
-| S_x10.fastq |        |      |        |
-| S_x100.fastq |        |      |        |
-
-Pacbio Salonella genome at 30X coverage:
-| raw reads      | fastqc | flye | quast |
-| ---------------| ------ |------|-------|
-| S_hifi.fastq |        |      |        |
-| S_hifi_x10.fastq |        |      |        |
 
 
 This command:
