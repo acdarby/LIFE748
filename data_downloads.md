@@ -17,5 +17,6 @@ wget https:<www.thewebpage/practical/reads/example.fastq> .
 NOTE: 
 > You can download a whole folder by using -r the line below will download the dir "Example"
 ```
-wget -r https://cgr.liv.ac.uk/454/acdarby/LIFE748/Example .
+wget -r https:<www.thewebpage/practical/reads/Example> .
+
 ```
