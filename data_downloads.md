@@ -3,8 +3,8 @@
 The data pages are on Canvas on the section labled "Data for Workshops"
 
 [DIR] annotation       - bakta and prokka outputs  
-[DIR] assemblies.      - flye fasta assemblies in one place  
-[DIR] fastqc           - fastqc report for raw fastq in `/raw` 
+[DIR] assemblies       - flye fasta assemblies in one place  
+[DIR] fastqc           - fastqc report for raw fastq in `/raw`
 [DIR] flye             - flye assembly output dir
 [DIR] quast            - quast report for flye assemblies
 [DIR] raw              - raw data files
