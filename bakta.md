@@ -36,22 +36,42 @@ the other data follow this pattern
 > - Use artemis to view and review the genecalls
 
 
-Create environment and install artemis and conda
+Create environments and install artemis, bakta and prokka
 
 ``` 
-conda create -n anno
-conda activate anno 
-
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda install artemis
-
+conda create -n bakta
+conda activate bakta 
 conda install -c bioconda bakta
 bakta_db download --output ~/tmp_data/ --type light
+conda deactivate
 ```
+
+```
+conda create -n prokka
+conda activate prokka 
+conda install -c bioconda prokka
+
+conda deactivate
+```
+
+```
+conda create -n artemis
+conda activate artemis 
+conda install -c bioconda artemis
+
+conda deactivate
+```
+
 
 run bakta - using the light database and the sample you have selected 
 ```
+conda activate bakta
 bakta --db db-light GN3_hifix30_flye_assembly.fasta --output bakta/GN3_hifix30_flye_assembly
+conda deactivate
 ```
-
+run prokka
+```
+conda activate prokka
+prokka -h
+#SEE IF YOU CAN WORK IT OUT
+```
