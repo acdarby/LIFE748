@@ -7,3 +7,4 @@
 
 ## - [Assembly Workshop](Assembly_WS.md) 
 
+## - [Prokaryotes Gene calling and Annotation](bakta.md)
