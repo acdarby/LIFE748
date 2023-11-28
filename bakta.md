@@ -57,7 +57,7 @@ conda install -c bioconda prokka
 ```
 conda create -n artemis
 conda activate artemis 
-conda install -c bioconda artemis
+conda install -c bioconda -c conda-forge artemis
 
 #conda deactivate
 ```
