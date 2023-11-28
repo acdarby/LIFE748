@@ -79,4 +79,4 @@ you can use the command
 ```
 art GN3_hifix30_flye_assembly.embl + GN3_hifix30_flye_assembly.gbk.txt
 ```
-to view annotations on the saame genome assembly 
+to view annotations on the same genome assembly 
