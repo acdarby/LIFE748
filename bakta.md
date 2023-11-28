@@ -75,3 +75,8 @@ conda activate prokka
 prokka -h
 #SEE IF YOU CAN WORK IT OUT
 ```
+you can use the command 
+```
+art GN3_hifix30_flye_assembly.embl + GN3_hifix30_flye_assembly.gbk.txt
+```
+to view annotations on the saame genome assembly 
