@@ -43,7 +43,7 @@ conda create -n bakta
 conda activate bakta 
 conda install -c conda-forge -c bioconda bakta
 bakta_db download --output ~/tmp_data/ --type light
-conda deactivate
+#conda deactivate
 ```
 
 ```
@@ -51,7 +51,7 @@ conda create -n prokka
 conda activate prokka 
 conda install -c bioconda prokka
 
-conda deactivate
+#conda deactivate
 ```
 
 ```
@@ -59,7 +59,7 @@ conda create -n artemis
 conda activate artemis 
 conda install -c bioconda artemis
 
-conda deactivate
+#conda deactivate
 ```
 
 
