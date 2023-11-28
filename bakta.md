@@ -41,7 +41,7 @@ Create environments and install artemis, bakta and prokka
 ``` 
 conda create -n bakta
 conda activate bakta 
-conda install -c bioconda bakta
+conda install -c conda-forge -c bioconda bakta
 bakta_db download --output ~/tmp_data/ --type light
 conda deactivate
 ```
