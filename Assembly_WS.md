@@ -284,12 +284,13 @@ You can run Flye polisher as a standalone tool using
 --polish-target option.
 ```
 
+This command for ONT raw (uncorrected) reads:
 ```
 flye --nano-raw S_ONT_raw_short.fastq --out-dir S_ONT_raw_short
 ```
 
 
-This command:
+This command for PacBio HiFi:
 ```
 flye --pacbio-hifi GN3_long.fastq --out-dir GN3_long
 ```
@@ -358,5 +359,51 @@ provide this output to stdout:
 	Scaffolds:	0
 	Mean coverage:	46
 
-[2023-11-22 23:39:29] INFO: Final assembly: /pub59/acdarby/tmp_data/GN3_long/assembly.fasta
+[2023-11-22 23:39:29] INFO: Final assembly: /tmp_data/GN3_long/assembly.fasta
 ```
+Here's a ready-to-use **QUAST protocol** for multiple assemblies, formatted for GitHub:
+
+---
+
+## Running QUAST on Multiple Assemblies
+
+Instructions to run QUAST on multiple genome assemblies in a single command.
+
+### Steps
+
+1. **Prepare Your Assembly Files**:  
+   Place all assembly files (e.g., FASTA files) into a single directory.
+
+2. **Run QUAST on Multiple Assemblies**:
+   You can specify all assembly files individually or use the directory path containing all assemblies.
+
+   - **Directly Specifying Files**:
+     ```bash
+     quast.py assembly1.fasta assembly2.fasta assembly3.fasta -o quast_output
+     ```
+
+   - **Using a Directory**:
+     ```bash
+     quast.py /path/to/assemblies/* -o quast_output
+     ```
+
+3. **Optional: Use a Reference Genome**  
+   If you have a reference genome, include it to get alignment-based metrics.
+   ```bash
+   quast.py /path/to/assemblies/* -r reference_genome.fasta -o quast_output
+   ```
+
+4. **Additional Options**:  
+   QUAST offers various parameters for customization:
+   - `--gene-finding` to predict genes
+   - `--threads <num>` to specify thread count
+   - `--min-contig <size>` to set a minimum contig length (default is 500 bp)
+
+5. **Example Command with Options**:
+   ```bash
+   quast.py /path/to/assemblies/* -r reference_genome.fasta --gene-finding --threads 4 -o quast_output
+   ```
+
+### Results
+All results will be saved in the `quast_output` directory, including summary reports, assembly metrics, and additional analyses.
+
